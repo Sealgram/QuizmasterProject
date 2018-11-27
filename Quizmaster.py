@@ -1,4 +1,4 @@
-import os, time, random, prettytable
+import os, time, random
 
 os.chdir("Categories")
 score = []
@@ -23,8 +23,8 @@ def scoresave(score):
     player = open(username, 'a')
     print("saving score...")
     time.sleep(0.5)
-    player.write("\n")
     player.write(score)
+    player.write("\n")
     time.sleep(1)
     return username
 
@@ -43,7 +43,7 @@ def existingprofile():
             print("")
     player = open(username, 'a')
     player.write("\n")
-    player.write("Attempt 2:")
+    player.write("Next Attempt:")
     player.write("\n")
     player.write("Score:")
     player.write("\n")
@@ -155,7 +155,6 @@ if save.title() == 'Yes':
     scoresave(str(sum(score)))
 elif save.title() == 'No':
     print("Score Deleted!")
-print(playerline)
+time.sleep(1)
 print("")
-time.sleep(5)
 print("Thanks for Playing!")

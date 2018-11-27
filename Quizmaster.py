@@ -1,18 +1,52 @@
-import os, time, random
+import os, time, random, prettytable
 
 os.chdir("Categories")
+score = []
+
+
 def start():
-    print("What is your Username? (ex: 'username.txt')")
+    print("What is your Username? (ex: 'username')")
     username = input(">>>")
     username = username + '.txt'
     player = open(username, 'w+')
+    player.seek(0, 0)
     player.write(username)
     player.write("\n")
     player.write("Score:")
     player.write("\n")
+    time.sleep(0.5)
     print("Profile Created!")
-    print("")
+    return username
+
+
+def scoresave(score):
+    player = open(username, 'a')
+    print("saving score...")
+    time.sleep(0.5)
+    player.write("\n")
+    player.write(score)
     time.sleep(1)
+    return username
+
+
+def existingprofile():
+    while 0 == 0:
+        print("What is your Username you previously saved under? (ex: 'username')")
+        username = input(">>>")
+        username = username + '.txt'
+        try:
+            open(username, 'r')
+            print("Profile Opened!")
+            break
+        except OSError:
+            print("That profile does not exist!")
+            print("")
+    player = open(username, 'a')
+    player.write("\n")
+    player.write("Attempt 2:")
+    player.write("\n")
+    player.write("Score:")
+    player.write("\n")
     return username
 
 
@@ -21,8 +55,10 @@ def categoryselect():
     random.shuffle(categories)
     y = random.randint(0, 4)
     category = categories[y]
+    print("")
     print("Here is the category whose questions you will be answering!")
     print(category)
+    print("")
     if category == 'Video Games':
         category = 'Category 1'
     elif category == 'Computer Building':
@@ -36,529 +72,90 @@ def categoryselect():
     return category
 
 
-def category1(username):
-    category = open("Category 1", "r")
+def category():
+    category = open(categoryselect(), "r")
     line = category.readlines()
-    player = open(username, 'a+')
     questions = [3, 5, 7, 9, 11]
     while 0 == 0:
         y = random.choice(questions)
-        print("Here is the first question...")
+        questions.remove(y)
+        print("")
+        print("Asking Question...")
         print(line[y])
         print("Input your Answer: ")
         PlayerResponse1 = input(">>>")
         y = y + 1
-        if PlayerResponse1.lower() == line[y].strip():
+        if PlayerResponse1.title() == line[y].strip():
             print("You are Correct!")
             print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse1.lower() != line[y].strip():
+            score.append(1)
+        elif PlayerResponse1.title() != line[y].strip():
             print("That is wrong!")
             print("")
+        if len(questions) == 0:
             break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the second question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse2 = input(">>>")
-        y = y + 1
-        if PlayerResponse2.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse2.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the third question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse3 = input(">>>")
-        y = y + 1
-        if PlayerResponse3.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse3.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
+
     time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fourth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse4 = input(">>>")
-        y = y + 1
-        if PlayerResponse4.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse4.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fifth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse5 = input(">>>")
-        y = y + 1
-        if PlayerResponse5.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse5.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    print("End of Category 1.")
+    print("End of Category.")
     print("")
     time.sleep(1)
-    print("Here is your total score, including Category 1:")
-    player = open(username, 'r')
-    playerline = player.readlines()
-    print(playerline)
+    print("Here is your total score:")
+    print(sum(score))
 
 
-def category2(username):
-    category = open("Category 2", "r")
-    line = category.readlines()
-    player = open(username, 'a+')
-    questions = [3, 5, 7, 9, 11]
-    while 0 == 0:
-        y = random.choice(questions)
-        print("Here is the first question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse1 = input(">>>")
-        y = y + 1
-        if PlayerResponse1.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse1.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the second question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse2 = input(">>>")
-        y = y + 1
-        if PlayerResponse2.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse2.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the third question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse3 = input(">>>")
-        y = y + 1
-        if PlayerResponse3.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse3.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fourth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse4 = input(">>>")
-        y = y + 1
-        if PlayerResponse4.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse4.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fifth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse5 = input(">>>")
-        y = y + 1
-        if PlayerResponse5.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse5.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    print("End of Category 2.")
+def intro():
     print("")
-    time.sleep(1)
-    print("Here is your total score, including category 2:")
-    player = open(username, 'r')
-    playerline = player.readlines()
-    print(playerline)
-
-
-def category3(username):
-    category = open("Category 3", "r")
-    line = category.readlines()
-    player = open(username, 'a+')
-    questions = [3, 5, 7, 9, 11]
-    while 0 == 0:
-        y = random.choice(questions)
-        print("Here is the first question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse1 = input(">>>")
-        y = y + 1
-        if PlayerResponse1.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse1.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the second question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse2 = input(">>>")
-        y = y + 1
-        if PlayerResponse2.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse2.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the third question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse3 = input(">>>")
-        y = y + 1
-        if PlayerResponse3.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse3.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fourth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse4 = input(">>>")
-        y = y + 1
-        if PlayerResponse4.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse4.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fifth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse5 = input(">>>")
-        y = y + 1
-        if PlayerResponse5.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse5.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    print("End of Category 3.")
+    print("Welcome to the Quizmaster Python Game!")
+    time.sleep(0.3)
+    print(" _______          _________ _______  _______  _______  _______ _________ _______  _______ ")
+    time.sleep(0.3)
+    print("(  ___  )|\     /|\__   __// ___   )(       )(  ___  )(  ____ \\__   __/(  ____ \(  ____ )")
+    time.sleep(0.3)
+    print("| (   ) || )   ( |   ) (   \/   )  || () () || (   ) || (    \/   ) (   | (    \/| (    )|")
+    time.sleep(0.3)
+    print("| |   | || |   | |   | |       /   )| || || || (___) || (_____    | |   | (__    | (____)|")
+    time.sleep(0.3)
+    print("| |   | || |   | |   | |      /   / | |(_)| ||  ___  |(_____  )   | |   |  __)   |     __)")
+    time.sleep(0.3)
+    print("| | /\| || |   | |   | |     /   /  | |   | || (   ) |      ) |   | |   | (      | (\ (   ")
+    time.sleep(0.3)
+    print("| (_\ \ || (___) |___) (___ /   (_/\| )   ( || )   ( |/\____) |   | |   | (____/\| ) \ \__")
+    time.sleep(0.3)
+    print("(____\/_)(_______)\_______/(_______/|/     \||/     \|\_______)   )_(   (_______/|/   \__/")
+    time.sleep(0.3)
     print("")
-    time.sleep(1)
-    print("Here is your total score, including category 3:")
-    player = open(username, 'r')
-    playerline = player.readlines()
-    print(playerline)
-
-
-def category4(username):
-    category = open("Category 4", "r")
-    line = category.readlines()
-    player = open(username, 'a+')
-    questions = [3, 5, 7, 9, 11]
-    while 0 == 0:
-        y = random.choice(questions)
-        print("Here is the first question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse1 = input(">>>")
-        y = y + 1
-        if PlayerResponse1.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse1.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the second question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse2 = input(">>>")
-        y = y + 1
-        if PlayerResponse2.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse2.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the third question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse3 = input(">>>")
-        y = y + 1
-        if PlayerResponse3.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse3.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fourth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse4 = input(">>>")
-        y = y + 1
-        if PlayerResponse4.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse4.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fifth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse5 = input(">>>")
-        y = y + 1
-        if PlayerResponse5.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse5.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    print("End of Category 4.")
+    print("This is a quiz game. 2 Categories will be randomly selected, and you will answer five questions from each.")
     print("")
-    time.sleep(1)
-    print("Here is your total score, including category 4:")
-    player = open(username, 'r')
-    playerline = player.readlines()
-    print(playerline)
 
-
-def category5(username):
-    category = open("Category 5", "r")
-    line = category.readlines()
-    player = open(username, 'a+')
-    questions = [3, 5, 7, 9, 11]
-    while 0 == 0:
-        y = random.choice(questions)
-        print("Here is the first question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse1 = input(">>>")
-        y = y + 1
-        if PlayerResponse1.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse1.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the second question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse2 = input(">>>")
-        y = y + 1
-        if PlayerResponse2.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse2.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the third question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse3 = input(">>>")
-        y = y + 1
-        if PlayerResponse3.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse3.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fourth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse4 = input(">>>")
-        y = y + 1
-        if PlayerResponse4.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse4.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    while 0 == 0:
-        y = y - 1
-        questions.remove(y)
-        y = random.choice(questions)
-        print("Here is the fifth question...")
-        print(line[y])
-        print("Input your Answer: ")
-        PlayerResponse5 = input(">>>")
-        y = y + 1
-        if PlayerResponse5.lower() == line[y].strip():
-            print("You are Correct!")
-            print("")
-            player.write("+1 Point\n")
-            break
-        elif PlayerResponse5.lower() != line[y].strip():
-            print("That is wrong!")
-            print("")
-            break
-    time.sleep(1)
-    print("End of Category 5.")
-    print("")
-    time.sleep(1)
-    print("Here is your total score, including category 5:")
-    player = open(username, 'r')
-    playerline = player.readlines()
-    print(playerline)
-
-
+intro()
+time.sleep(1)
+print("Do you Have a Previous Profile you would like to add to, or would you like to make a new one?? ('add', 'new') ")
+profile = input(">>>")
+while 0 == 0:
+    if profile.title() == 'Add':
+        username = existingprofile()
+        break
+    elif profile.title() == 'New':
+        username = start()
+        break
+time.sleep(1)
+print("Starting Game...")
 print("")
+category()
+print("")
+time.sleep(1)
+category()
+print("")
+time.sleep(1)
+print("You have answered 2 Categories!")
+print("Here is your score!")
+print(sum(score))
+save = input("Would you like to save your score? ('yes', 'no') ")
+if save.title() == 'Yes':
+    scoresave(str(sum(score)))
+elif save.title() == 'No':
+    print("Score Deleted!")
+print(playerline)
+print("")
+time.sleep(5)
+print("Thanks for Playing!")

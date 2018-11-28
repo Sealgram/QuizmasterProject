@@ -33,7 +33,7 @@ def scoresave(score):
     return username
 
 
-def existingprofile():
+def username():
     while 0 == 0:
         print("What is your Username you previously saved under? (ex: 'username')")
         username = input(">>>")
@@ -41,17 +41,27 @@ def existingprofile():
         try:
             open(username, 'r')
             print("Profile Opened!")
+            existingprofile(username)
             break
         except OSError:
             print("That profile does not exist!")
-            print("")
+            choice = input("Would you like to try again, or create a new profile? ('try', 'new') ")
+            if choice.lower() == 'try':
+                continue
+            elif choice.lower() == 'new':
+                print("")
+                start()
+                break
+    return username
+
+
+def existingprofile(username):
     player = open(username, 'a')
     player.write("\n")
     player.write("Next Attempt:")
     player.write("\n")
     player.write("Score:")
     player.write("\n")
-    return username
 
 
 def categoryselect(categorychoice):
@@ -92,7 +102,7 @@ def category(categorychoice):
     categorychoice1 = categoryselect(categorychoice)
     category = open(categorychoice1, "r")
     line = category.readlines()
-    questions = [3, 5, 7, 9, 11]
+    questions = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
     while 0 == 0:
         y = random.choice(questions)
         questions.remove(y)
@@ -109,7 +119,7 @@ def category(categorychoice):
         elif PlayerResponse1.title() != line[y].strip():
             print("That is wrong!")
             print("")
-        if len(questions) == 0:
+        if len(questions) == 4:
             break
     time.sleep(1)
     print("End of Category.")
@@ -151,7 +161,7 @@ print("Do you Have a Previous Profile you would like to add to, or would you lik
 while 0 == 0:
     profile = input(">>>")
     if profile.title() == 'Add':
-        username = existingprofile()
+        username = username()
         break
     elif profile.title() == 'New':
         username = start()

@@ -2,3 +2,12 @@ Sealgram
 
 First attempt:
 Sealgram's Score: 9
+
+Next Attempt:
+Sealgram's Score: 10
+
+Next Attempt:
+Sealgram's Score: 9
+
+Next Attempt:
+Sealgram's Score: 10

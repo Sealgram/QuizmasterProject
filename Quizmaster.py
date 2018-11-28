@@ -11,7 +11,17 @@ def highscores():
     for x in profiles:
         profile = open(x, 'r')
         line = profile.readlines()
-        highscores.append(line[3].strip())
+        filesize = len(line)
+        lineappend = 3
+        filelength = 4
+        highscores.append(line[lineappend].strip())
+        while 0 == 0:
+            filelength = filelength + 3
+            lineappend = lineappend + 3
+            if filesize >= filelength:
+                highscores.append(line[lineappend].strip())
+            else:
+                break
     highscores.sort()
     return highscores
 
@@ -49,11 +59,12 @@ def username():
     while 0 == 0:
         print("What is your Username you previously saved under? (ex: 'username')")
         username = input(">>>")
+        title = username
         username = username + '.txt'
         try:
             open(username, 'r')
             print("Profile Opened!")
-            existingprofile(username)
+            existingprofile(username, title)
             break
         except OSError:
             print("That profile does not exist!")
@@ -67,13 +78,12 @@ def username():
     return username
 
 
-def existingprofile(username):
+def existingprofile(username, title):
     player = open(username, 'a')
     player.write("\n")
     player.write("Next Attempt:")
     player.write("\n")
-    player.write("Score:")
-    player.write("\n")
+    player.write(title + "'s Score: ")
 
 
 def categoryselect(categorychoice):
@@ -120,7 +130,6 @@ def category(categorychoice):
         questions.remove(y)
         time.sleep(1)
         print("")
-        print("Asking Question...")
         time.sleep(0.2)
         print(line[y])
         print("Input your Answer: ")

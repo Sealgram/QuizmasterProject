@@ -1,5 +1,5 @@
 import os
-os.chdir("Categories")
+os.chdir("Profiles")
 while 0 == 0:
     try:
         username = input("What is the username of the profile you would like to delete? ")

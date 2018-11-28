@@ -5,20 +5,15 @@ score = []
 
 def highscores():
     highscores = []
-    profiles = os.listdir('Profiles')
     os.chdir('..')
+    profiles = os.listdir('Profiles')
     os.chdir('Profiles')
     for x in profiles:
         profile = open(x, 'r')
         line = profile.readlines()
-        highscores.append(line[3])
+        highscores.append(line[3].strip())
     highscores.sort()
     return highscores
-
-
-def highscoresexecute():
-    print("Here are the game's all-time highscores!")
-    print(highscores())
 
 
 def start():
@@ -33,8 +28,7 @@ def start():
     player.write("\n")
     player.write("First attempt:")
     player.write("\n")
-    player.write("Score:")
-    player.write("\n")
+    player.write(title + "'s Score: ")
     time.sleep(0.5)
     print("Profile Created!")
     return username
@@ -47,6 +41,7 @@ def scoresave(score):
     player.write(score)
     player.write("\n")
     time.sleep(1)
+    print("")
     return username
 
 
@@ -123,11 +118,14 @@ def category(categorychoice):
     while 0 == 0:
         y = random.choice(questions)
         questions.remove(y)
+        time.sleep(1)
         print("")
         print("Asking Question...")
+        time.sleep(0.2)
         print(line[y])
         print("Input your Answer: ")
         PlayerResponse1 = input(">>>")
+        time.sleep(0.5)
         y = y + 1
         if PlayerResponse1.title() == line[y].strip():
             print("You are Correct!")
@@ -206,12 +204,17 @@ print("Here is your score!")
 print(sum(score))
 time.sleep(1)
 save = input("Would you like to save your score? ('yes', 'no') ")
+os.chdir('..')
 os.chdir('Profiles')
 if save.title() == 'Yes':
     scoresave(str(sum(score)))
 elif save.title() == 'No':
     os.remove(username)
     print("Score Deleted!")
+time.sleep(1)
+print("")
+print("Here are the game's all-time highscores!")
+print(highscores())
 time.sleep(1)
 print("")
 print("Thanks for Playing!")

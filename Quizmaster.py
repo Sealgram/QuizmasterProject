@@ -1,7 +1,24 @@
 import os, time, random
 
-os.chdir("Categories")
 score = []
+
+
+def highscores():
+    highscores = []
+    profiles = os.listdir('Profiles')
+    os.chdir('..')
+    os.chdir('Profiles')
+    for x in profiles:
+        profile = open(x, 'r')
+        line = profile.readlines()
+        highscores.append(line[3])
+    highscores.sort()
+    return highscores
+
+
+def highscoresexecute():
+    print("Here are the game's all-time highscores!")
+    print(highscores())
 
 
 def start():
@@ -155,6 +172,7 @@ def intro():
     print("Do not use any punctuation in your answers. Your answers are not case sensitive.")
     print("")
 
+os.chdir('Profiles')
 intro()
 time.sleep(1)
 print("Do you Have a Previous Profile you would like to add to, or would you like to make a new one?? ('add', 'new') ")
@@ -173,6 +191,8 @@ while 0 == 0:
 time.sleep(1)
 print("Starting Game...")
 print("")
+os.chdir('..')
+os.chdir('Categories')
 categorychoice = 0
 categorychoice1 = category(categorychoice)
 categorychoice = categorychoice1
@@ -184,7 +204,9 @@ time.sleep(1)
 print("You have answered 2 Categories!")
 print("Here is your score!")
 print(sum(score))
+time.sleep(1)
 save = input("Would you like to save your score? ('yes', 'no') ")
+os.chdir('Profiles')
 if save.title() == 'Yes':
     scoresave(str(sum(score)))
 elif save.title() == 'No':

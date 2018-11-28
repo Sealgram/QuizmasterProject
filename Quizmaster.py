@@ -7,10 +7,14 @@ score = []
 def start():
     print("What is your Username? (ex: 'username')")
     username = input(">>>")
+    title = username
     username = username + '.txt'
     player = open(username, 'w+')
-    player.seek(0, 0)
-    player.write(username)
+    player.write(title)
+    player.write("\n")
+    player.write("")
+    player.write("\n")
+    player.write("First attempt:")
     player.write("\n")
     player.write("Score:")
     player.write("\n")
@@ -50,10 +54,22 @@ def existingprofile():
     return username
 
 
-def categoryselect():
+def categoryselect(categorychoice):
+    if categorychoice == 'Category 1':
+        categorychoice = 'Video Games'
+    elif categorychoice == 'Category 2':
+        categorychoice = 'Computer Building'
+    elif categorychoice == 'Category 3':
+        categorychoice = 'The Great Outdoors of Ontario'
+    elif categorychoice == 'Category 4':
+        categorychoice = 'Toronto'
+    elif categorychoice == 'Category 5':
+        categorychoice = 'Game of Thrones'
     categories = ['Video Games', 'Computer Building', 'The Great Outdoors of Ontario', 'Toronto', 'Game of Thrones']
     random.shuffle(categories)
-    y = random.randint(0, 4)
+    if categorychoice != 0:
+        categories.remove(categorychoice)
+    y = random.randint(0, len(categories) - 1)
     category = categories[y]
     print("")
     print("Here is the category whose questions you will be answering!")
@@ -72,8 +88,9 @@ def categoryselect():
     return category
 
 
-def category():
-    category = open(categoryselect(), "r")
+def category(categorychoice):
+    categorychoice1 = categoryselect(categorychoice)
+    category = open(categorychoice1, "r")
     line = category.readlines()
     questions = [3, 5, 7, 9, 11]
     while 0 == 0:
@@ -94,13 +111,13 @@ def category():
             print("")
         if len(questions) == 0:
             break
-
     time.sleep(1)
     print("End of Category.")
     print("")
     time.sleep(1)
     print("Here is your total score:")
     print(sum(score))
+    return categorychoice1
 
 
 def intro():
@@ -109,7 +126,7 @@ def intro():
     time.sleep(0.3)
     print(" _______          _________ _______  _______  _______  _______ _________ _______  _______ ")
     time.sleep(0.3)
-    print("(  ___  )|\     /|\__   __// ___   )(       )(  ___  )(  ____ \\__   __/(  ____ \(  ____ )")
+    print("(  ___  )|\     /|\__   __// ___   )(       )(  ___  )(  ____ ||__   __|(  ____ \(  ____ )")
     time.sleep(0.3)
     print("| (   ) || )   ( |   ) (   \/   )  || () () || (   ) || (    \/   ) (   | (    \/| (    )|")
     time.sleep(0.3)
@@ -125,26 +142,33 @@ def intro():
     time.sleep(0.3)
     print("")
     print("This is a quiz game. 2 Categories will be randomly selected, and you will answer five questions from each.")
+    print("Do not use any punctuation in your answers. Your answers are not case sensitive.")
     print("")
 
 intro()
 time.sleep(1)
 print("Do you Have a Previous Profile you would like to add to, or would you like to make a new one?? ('add', 'new') ")
-profile = input(">>>")
 while 0 == 0:
+    profile = input(">>>")
     if profile.title() == 'Add':
         username = existingprofile()
         break
     elif profile.title() == 'New':
         username = start()
         break
+    elif profile.title() != 'Add' or 'New':
+        print("That is not an option!")
+        time.sleep(0.5)
+        continue
 time.sleep(1)
 print("Starting Game...")
 print("")
-category()
+categorychoice = 0
+categorychoice1 = category(categorychoice)
+categorychoice = categorychoice1
 print("")
 time.sleep(1)
-category()
+category(categorychoice)
 print("")
 time.sleep(1)
 print("You have answered 2 Categories!")
@@ -154,6 +178,7 @@ save = input("Would you like to save your score? ('yes', 'no') ")
 if save.title() == 'Yes':
     scoresave(str(sum(score)))
 elif save.title() == 'No':
+    os.remove(username)
     print("Score Deleted!")
 time.sleep(1)
 print("")

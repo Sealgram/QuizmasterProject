@@ -119,7 +119,7 @@ def category(categorychoice):
         elif PlayerResponse1.title() != line[y].strip():
             print("That is wrong!")
             print("")
-        if len(questions) == 4:
+        if len(questions) == 5:
             break
     time.sleep(1)
     print("End of Category.")

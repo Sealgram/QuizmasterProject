@@ -23,7 +23,8 @@ def highscores():
             else:
                 break
     highscores.sort()
-    return highscores
+    for x in highscores:
+        print(x)
 
 
 def start():
@@ -179,6 +180,7 @@ def intro():
     print("Do not use any punctuation in your answers. Your answers are not case sensitive.")
     print("")
 
+
 os.chdir('Profiles')
 intro()
 time.sleep(1)
@@ -223,7 +225,7 @@ elif save.title() == 'No':
 time.sleep(1)
 print("")
 print("Here are the game's all-time highscores!")
-print(highscores())
+highscores()
 time.sleep(1)
 print("")
 print("Thanks for Playing!")

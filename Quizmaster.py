@@ -240,7 +240,8 @@ def category(categorychoice):
         elif playerresponse1.title() != line[y].strip():
             print("That is wrong!")
             print("")
-            # Checks if the player is wrong, and if they are, informs them so.
+            print("The correct answer was: ", line[y])
+            # Checks if the player is wrong, informs them so, and tells them what the correct answer is.
         if len(questions) == 5:
             break
             # If 5 questions have been asked, breaks  the while loop, and continues the program.
